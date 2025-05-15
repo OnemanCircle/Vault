@@ -1,69 +1,102 @@
 body {
-margin: 0;
-font-family: "Segoe UI", sans-serif;
-background-color: #0f0f0f;
-color: #eee;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #1a202c; /* Dark background */
+    color: #e2e8f0; /* Light text */
+    font-family: sans-serif;
 }
-h1 {
-text-align: center;
-margin-top: 20px;
+
+.gallery-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
 }
-.container {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 30px;
-padding-bottom: 100px;
+
+.gallery-item {
+    flex: 0 0 auto;
+    width: 100vw; /* Full viewport width */
+    height: 80vh; /* Adjust as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2d3748; /* Darker container background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.section {
-background: #1c1c1c;
-padding: 14px 28px;
-border-radius: 12px;
-font-size: 20px;
-cursor: pointer;
-box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-transition: all 0.2s;
+
+.gallery-item img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
 }
-.section:hover {
-background: #2c2c2c;
-transform: scale(1.02);
+
+.controls {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none; /* Allows clicks to go through to the gallery if not on buttons */
 }
-.catalogue {
-display: none;
-margin-top: 20px;
+
+.control-button {
+    background: rgba(56, 182, 255, 0.5); /* Blue semi-transparent */
+    color: #e2e8f0;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    pointer-events: auto; /* Re-enable pointer events for buttons */
 }
-.inner-section {
-background: #252525;
-color: #fff;
-padding: 10px 22px;
-margin: 8px 0;
-border-radius: 10px;
-font-size: 16px;
-cursor: pointer;
-transition: background 0.2s;
+
+.control-button:hover {
+    opacity: 1;
 }
-.inner-section:hover {
-background: #3a3a3a;
+
+.cyberpunk-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
 }
-.gallery {
-display: flex;
-overflow-x: auto;
-gap: 14px;
-padding: 16px;
-margin-top: 16px;
+
+.cyberpunk-layer {
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background-repeat: repeat;
+    opacity: 0.6;
+    animation: pan 20s linear infinite alternate;
 }
-.gallery img {
-height: 300px;
-border-radius: 12px;
-transition: transform 0.3s;
+
+/* Example cyberpunk background layers using SVG for simplicity and customizability */
+/* You can replace these with image URLs if you prefer */
+.layer-1 {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"%3E%3Crect fill="%2338b6ff" x="0" y="0" width="2" height="2"/%3E%3Crect fill="none" stroke="%232563eb" stroke-width="0.5" x="5" y="5" width="10" height="10"/%3E%3C/svg%3E');
+    animation-duration: 30s;
 }
-.gallery img:hover {
-transform: scale(1.05);
+
+.layer-2 {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"%3E%3Ccircle fill="%2363b3ed" cx="15" cy="15" r="1"/%3E%3C/svg%3E');
+    animation-duration: 25s;
+    animation-delay: 5s;
+    opacity: 0.4;
 }
-footer {
-text-align: center;
-font-size: 12px;
-color: #aaa;
-padding: 30px 10px;
-margin-top: 40px;
+
+.layer-3 {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Cline stroke="%234299e1" x1="0" y1="20" x2="40" y2="20" stroke-width="0.5"/%3E%3C/svg%3E');
+    animation-duration: 40s;
+    animation-delay: 10s;
+    opacity: 0.5;
+}
+
+@keyframes pan {
+    0% { transform: translate(-25%, -25%); }
+    100% { transform: translate(0%, 0%); }
 }
